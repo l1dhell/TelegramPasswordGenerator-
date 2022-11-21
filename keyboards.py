@@ -5,9 +5,11 @@ Button_DoGenerate = InlineKeyboardButton("Generate Password",callback_data="Gene
 Button_SetValue = InlineKeyboardButton("Set password length",callback_data="Set your lenght")
 Button_INFO = InlineKeyboardButton("Information about the Creator",callback_data="Information about the Creator")
 Button_Program = InlineKeyboardButton("Link to password generator",callback_data="Link to password generator")
+Burron_Close = InlineKeyboardButton("Close the bot",callback_data="Close the bot")
 Keyboard.add(Button_DoGenerate)
 Keyboard.add(Button_SetValue)
 Keyboard.row(Button_INFO,Button_Program)
+Keyboard.add(Burron_Close)
 
 LenghtKeyboard = InlineKeyboardMarkup(row_width=3,resize_keyboard=True,one_time_keyboard=True)
 B1 =  InlineKeyboardButton("0-8",callback_data="0-8")
