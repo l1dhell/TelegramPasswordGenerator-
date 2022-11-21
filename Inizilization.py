@@ -28,13 +28,13 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=["start"])
 async def send_welcome(message: types.Message):
-    await message.reply("Hello",reply_markup=Keyboard)
+    await message.answer("Hello",reply_markup=Keyboard)
 
-@dp.message_handler(commands=["GeneratePassword"])
+@dp.message_handler(commands=["GeneratePassword"],state=None)
 async def Generator(message:types.message):
-    await message.reply("How long will the password be? \nSend me a number.")
+    await message.answer("Your password")
     Password = GeneratePassword(12)
-    await message.reply(f"Your password:{Password}")
+    await message.answer(f":{Password}")
 
 #Включение бота
 async def on_startup(_):
