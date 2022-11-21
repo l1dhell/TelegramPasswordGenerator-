@@ -1,3 +1,20 @@
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+Keyboard = InlineKeyboardMarkup(row_width=2,resize_keyboard=True,one_time_keyboard=True)
+Button_DoGenerate = InlineKeyboardButton("Generate Password",callback_data="Generate Password")
+Button_SetValue = InlineKeyboardButton("Set password length",callback_data="Set your lenght")
+Button_INFO = InlineKeyboardButton("Information about the Creator",callback_data="Information about the Creator")
+Button_Program = InlineKeyboardButton("Link to password generator",callback_data="Link to password generator")
+Keyboard.add(Button_DoGenerate)
+Keyboard.add(Button_SetValue)
+Keyboard.row(Button_INFO,Button_Program)
 
-
+LenghtKeyboard = InlineKeyboardMarkup(row_width=3,resize_keyboard=True,one_time_keyboard=True)
+B1 =  InlineKeyboardButton("0-8",callback_data="0-8")
+B2 = InlineKeyboardButton("9-12",callback_data="9-12")
+B3 = InlineKeyboardButton("13-16",callback_data="13-16")
+B4 = InlineKeyboardButton("17-20",callback_data="17-20")
+B5 = InlineKeyboardButton("21-24",callback_data="21-24")
+B6 = InlineKeyboardButton("25-30",callback_data="25-30")
+LenghtKeyboard.row(B1,B2,B3)
+LenghtKeyboard.row(B4,B5,B6)

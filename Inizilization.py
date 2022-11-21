@@ -1,52 +1,65 @@
-import secrets
-import string
+import random
 from aiogram import Bot, Dispatcher,executor,types
 from config import TOKEN,ADMIN
-from aiogram.types import InlineKeyboardButton,InlineKeyboardMarkup
-
-
-def GeneratePassword(pwd_length):
-    pwd_length = int(pwd_length)
-    letters = string.ascii_letters
-    digits = string.digits
-    special_chars = string.punctuation
-
-    alphabet = letters + digits + special_chars
-
-    #pwd_length = 12
-
-    while True:
-      pwd = ''
-      for i in range(pwd_length):
-        pwd += ''.join(secrets.choice(alphabet))
-
-      if (any(char in special_chars for char in pwd) and
-          sum(char in digits for char in pwd)>=2):
-              break
-    return pwd
-
-Keyboard = InlineKeyboardMarkup(resize_keyboard=True,one_time_keyboard=True)
-Button_DoGenerate = InlineKeyboardButton("Generate Password",callback_data="Generate Password")
-Button_SetValue = InlineKeyboardButton("Set password length",callback_data="Set your lenght")
-Keyboard.add(Button_DoGenerate)
-Keyboard.add(Button_SetValue)
+from keyboards import Keyboard,LenghtKeyboard
+from GeneratorPassword import GeneratePassword
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
-
-
-@dp.callback_query_handler(text=["Generate Password","Set your lenght"])
+@dp.callback_query_handler(text=["Generate Password","Set your lenght","Link to password generator","Information about the Creator"])
 async def Generator(call:types.CallbackQuery):
     if call.data == "Generate Password":
         await call.message.answer(f"{GeneratePassword(12)}",reply_markup=Keyboard)
+        await call.message.delete()
+
     if call.data == "Set your lenght":
-        await call.message.answer("Send me a value")
-        LenghtPassword = call.data
-        await call.message.answer(f"{GeneratePassword(LenghtPassword)}")
+        await call.message.answer("Choose password length",reply_markup=LenghtKeyboard)
+        await call.message.delete()
+
+    if call.data == "Information about the Creator":
+        await call.message.answer("https://telegra.ph/School-Project-11-21",reply_markup=Keyboard)
+        await call.message.delete()
+
+    if call.data == "Link to password generator":
+        await call.message.answer("https://drive.google.com/file/d/1CKkAMvssWZWUYUoViJs-c5Qn-YeIMt-5/view?usp=share_link",reply_markup=Keyboard)
+        await call.message.delete()
 
 
-#Включение бота
+@dp.callback_query_handler(text=["0-8","9-12","13-16","17-20","21-24","25-30"])
+async def SetLenght(call:types.CallbackQuery):
+
+    if call.data == "0-8":
+        Value = random.randint(0,8)
+        await call.message.answer(f"{GeneratePassword(Value)}", reply_markup=Keyboard)
+        await call.message.delete()
+
+    if call.data == "9-12":
+        Value = random.randint(9,12)
+        await call.message.answer(f"{GeneratePassword(Value)}", reply_markup=Keyboard)
+        await call.message.delete()
+
+    if call.data == "13-16":
+        Value = random.randint(13,16)
+        await call.message.answer(f"{GeneratePassword(Value)}", reply_markup=Keyboard)
+        await call.message.delete()
+
+    if call.data == "17-20":
+        Value = random.randint(17,20)
+        await call.message.answer(f"{GeneratePassword(Value)}", reply_markup=Keyboard)
+        await call.message.delete()
+
+    if call.data == "21-24":
+        Value = random.randint(21,24)
+        await call.message.answer(f"{GeneratePassword(Value)}", reply_markup=Keyboard)
+        await call.message.delete()
+
+    if call.data == "25-30":
+        Value = random.randint(25,30)
+        await call.message.answer(f"{GeneratePassword(Value)}", reply_markup=Keyboard)
+        await call.message.delete()
+
+
 async def on_startup(_):
     await bot.send_message(ADMIN, "Bot is ready")
     print("Bot is working")
